@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: rest
-          image: graysonrichard/demucs-rest:v1
+          image: graysonrichard/music-rest:v1
           ports: [{ containerPort: 5000 }]
           env:
             - { name: REDIS_HOST, value: "redis" }
