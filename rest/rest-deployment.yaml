@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: rest }
+  template:
+    metadata:
+      labels: { app: rest }
+    spec:
+      containers:
+        - name: rest
+          image: graysonrichard/demucs-rest:v1
+          ports: [{ containerPort: 5000 }]
+          env:
+            - { name: REDIS_HOST, value: "redis" }
+            - { name: REDIS_PORT, value: "6379" }
+            - { name: WORK_QUEUE, value: "toWorker" }
+            - { name: S3_ENDPOINT, value: "http://minio:9000" }   # via ExternalName
+            - { name: S3_ACCESS_KEY, value: "rootuser" }
+            - { name: S3_SECRET_KEY, value: "rootpass123" }
+            - { name: INPUT_BUCKET, value: "queue" }
+            - { name: OUTPUT_BUCKET, value: "output" }
+          resources:
+            requests: { cpu: "100m", memory: "128Mi" }
+            limits:   { cpu: "250m", memory: "256Mi" }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-service
+spec:
+  selector: { app: rest }
+  type: NodePort
+  ports:
+    - name: http
+      port: 5000
+      targetPort: 5000

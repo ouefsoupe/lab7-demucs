@@ -1,0 +1,5 @@
+flask
+redis
+jsonpickle
+requests
+minio
