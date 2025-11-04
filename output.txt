@@ -1,0 +1,36 @@
+grri8788@cloudshell:~/lab7-demucs (first-scout-471222-e3)$ kubectl get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+minio-55fcf64cb-brqqk     1/1     Running   0          26s
+redis-57b599596c-q25nx    1/1     Running   0          126m
+rest-568ddd4b86-k64rw     1/1     Running   0          118m
+worker-5df896469b-wdjsm   1/1     Running   0          46m
+grri8788@cloudshell:~/lab7-demucs (first-scout-471222-e3)$ python3 short-sample-request.py
+Separate data/data/short-hop.mp3
+Response to http://35.222.21.186/apiv1/separate request is <class 'dict'>
+Make request http://35.222.21.186/apiv1/separate with json dict_keys(['mp3', 'callback'])
+mp3 is of type <class 'str'> and length 347248 
+{
+    "hash": "9627ed8f6b9ddd5b86fa495161a6de2ab371e2ed8e052d659a88c512",
+    "reason": "Song enqueued for separation"
+}
+Cache from server is
+Response to http://35.222.21.186/apiv1/queue request is <class 'NoneType'>
+{
+    "queue": []
+}
+Separate data/data/short-dreams.mp3
+Response to http://35.222.21.186/apiv1/separate request is <class 'dict'>
+Make request http://35.222.21.186/apiv1/separate with json dict_keys(['mp3', 'callback'])
+mp3 is of type <class 'str'> and length 210212 
+{
+    "hash": "83abdba474adf043c6879343f3561e36d5d9b37d3dba90603b33affa",
+    "reason": "Song enqueued for separation"
+}
+Cache from server is
+Response to http://35.222.21.186/apiv1/queue request is <class 'NoneType'>
+{
+    "queue": [
+        "{\"hash\": \"83abdba474adf043c6879343f3561e36d5d9b37d3dba90603b33affa\", \"model\": \"mdx_extra_q\", \"callback\": {\"url\": \"http://localhost:5000\", \"data\": {\"mp3\": \"data/short-dreams.mp3\", \"data\": \"to be returned\"}}}"
+    ]
+}
+grri8788@cloudshell:~/lab7-demucs (first-scout-471222-e3)$ 
